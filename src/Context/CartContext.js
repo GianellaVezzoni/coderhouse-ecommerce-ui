@@ -1,34 +1,46 @@
-import { createContext, useReducer } from "react";
-
-const initialState = {
-  products: [],
-  total: 0
-};
+import { createContext, useState } from "react";
 
 export const CartContext = createContext();
 
-const reducer = (state, {type, payload}) => {
-  switch (type) {
-    case 'ADD_PRODUCTS':
-      console.log('payload ', payload)
-      let total = 0;
-      total = payload?.products?.map(item => item.price + total);
-      return {
-        ...state,
-        products: state.products.push(...payload.products),
-        total: total
-      };
-    default:
-      throw new Error(`Unknown action type: ${type}`);
-  }
-};
-
 export const CartProvider = ({children}) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [products, setProducts] = useState([]);  
+  const getProductById = (id) => {   
+    return products.find(p => p?.item?.id === id || p?.data?.id === id);
+  }  
+  
+  const addProductToCart = (product) => {
+    const existingProduct = getProductById(product?.item?.id || product?.data?.id);
+    let newState = [];
+    if (existingProduct) {
+      newState = products.map((p) => {
+        if (p?.item?.id === existingProduct?.item?.id || p?.data?.id === existingProduct?.data?.id) {
+          return {
+            item: p.item,
+            quantity: p.quantity + product.quantity
+          }
+        }
+        return p;
+      });
+      setProducts(newState);
+    };
+    setProducts([...products, product]);
+  }
 
-  return (
-    <CartContext.Provider value={{...state, dispatch}}>
-      {children}
-    </CartContext.Provider>
-  );
+  const removeProductFromCart = (product) => {
+    const newProducts = products.filter(p => p.item.id !== product.id);
+    setProducts(newProducts);
+  }
+
+  const deleteCart = () => {
+    setProducts([]);
+  }
+
+  const contextValue = {
+    cart: products,
+    addProductToCart,
+    removeProductFromCart,
+    deleteCart
+  };
+  
+  return <CartContext.Provider value={contextValue}>{children}</CartContext.Provider>
 };

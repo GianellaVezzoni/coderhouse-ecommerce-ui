@@ -43,7 +43,8 @@ const Login = () => {
         type: 'LOGIN',
         payload: {
           email: response.email,
-          token: response.token
+          token: response.token,
+          userId: response.id
         }
       });
       navigate('/');

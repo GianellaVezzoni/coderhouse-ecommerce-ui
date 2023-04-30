@@ -19,7 +19,9 @@ export const useStyles = createStyles((theme) => ({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    marginLeft: '1rem',
+    marginBottom: '1rem'
   },
   priceText: {
     fontSize: '20px',

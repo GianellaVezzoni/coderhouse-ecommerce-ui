@@ -23,5 +23,9 @@ export const useStyles = createStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingRight: '2rem'
+  },
+  boxProductListContainer: {
+    marginBottom: '5rem',
+    justifyContent: 'center'
   }
 }));

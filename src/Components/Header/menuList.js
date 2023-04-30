@@ -4,10 +4,6 @@ export const menu = [
     route: '/'
   },
   {
-    name: 'Soporte',
-    route: '/chat'
-  },
-  {
     name: 'Carrito',
     route: '/cart'
   },

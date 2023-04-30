@@ -6,6 +6,8 @@ import Register from '../Modules/Register/Views';
 import Products from '../Modules/Products/Views';
 import ProductDetail from '../Modules/ProductDetail/Views';
 import ProductManagement from '../Modules/ProductManagement/Views';
+import Cart from '../Modules/Cart/Views';
+import Order from '../Modules/Order/Views';
 
 const Navigation = () => {
   const {authenticated} = useAuth();
@@ -26,7 +28,8 @@ const Navigation = () => {
         </ProtectedRoute>
       } />
       <Route path="/detalle-producto/:productId" element={<ProtectedRoute><ProductDetail /></ProtectedRoute>} />
-      <Route path="/administrar-productos" element={<ProtectedRoute><ProductManagement /></ProtectedRoute>} />
+      <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
+      <Route path="/orden/:orderId" element={<ProtectedRoute><Order /></ProtectedRoute>} />
       <Route path="/login" element={<Login />} />
       <Route path="/registro" element={<Register />} />
     </Routes>

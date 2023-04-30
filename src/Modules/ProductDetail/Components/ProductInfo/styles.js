@@ -14,5 +14,13 @@ export const useStyles = createStyles((theme) => ({
   },
   buttonAddToCart: {
     marginTop: '2rem'
+  },
+  stockInput: {
+    marginTop: '2rem'
+  },
+  notification: {
+    position: 'absolute',
+    top: '3.5rem',
+    right: 0
   }
 }));

@@ -17,7 +17,8 @@ const reducer = (state, {type, payload}) => {
         ...state,
         authenticated: true,
         email: payload.email,
-        token: payload.token
+        token: payload.token,
+        userId: payload.userId
       };
     case 'LOGOUT':
       localStorage.removeItem('token');

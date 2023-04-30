@@ -3,14 +3,13 @@ import Header from '../../../Components/Header'
 import { ProductsList } from '../Components/ProductsList'
 import {httpGetMethod} from '../../../Api/index';
 import { PRODUCTS } from '../../../Api/constants';
-import { Box, Button, Loader, Text } from '@mantine/core';
+import { Box, Loader, Text } from '@mantine/core';
 import { useStyles } from './styles';
-import { useNavigate } from 'react-router-dom';
+import Footer from '../../../Components/Footer';
 
 const Products = () => {
   const {classes} = useStyles();
   const [productList, setProductList] = useState([]);
-  const navigate = useNavigate();
 
   const getData = useCallback(async() => {
     const response = await httpGetMethod(PRODUCTS, {});
@@ -27,16 +26,14 @@ const Products = () => {
       <Box className={classes.boxGridContainer}>
         <Box className={classes.topContentContainer}>
           <Text className={classes.sectionTitle}>Productos</Text>
-          <Button
-            onClick={() => navigate('/administrar-productos')}
-          >
-            Administrar productos
-          </Button>
         </Box>
         {productList.length > 0 ? (
-          <ProductsList products={productList} />
+          <Box className={classes.boxProductListContainer}>
+            <ProductsList products={productList} />
+          </Box>
         ):<Loader className={classes.loader} />}
       </Box>
+      <Footer />
     </>
   )
 }
